@@ -143,3 +143,56 @@ For queries, connect via GitHub or LinkedIn.
 ## 📜 License
 
 This project is open-source and free to use.
+
+User:
+  type: object
+  properties:
+    name:
+      type: string
+    email:
+      type: string
+      unique: true
+    password:
+      type: string
+      description: Hashed password
+
+Book:
+  type: object
+  properties:
+    title:
+      type: string
+    author:
+      type: string
+    genre:
+      type: string
+    description:
+      type: string
+    createdBy:
+      type: string
+      description: ObjectId reference to User
+    createdAt:
+      type: date
+    updatedAt:
+      type: date
+
+Review:
+  type: object
+  properties:
+    book:
+      type: string
+      description: ObjectId reference to Book
+    user:
+      type: string
+      description: ObjectId reference to User
+    rating:
+      type: integer
+      minimum: 1
+      maximum: 5
+    comment:
+      type: string
+    createdAt:
+      type: date
+    updatedAt:
+      type: date
+  constraints:
+    unique: [book, user]  # One review per user per book
